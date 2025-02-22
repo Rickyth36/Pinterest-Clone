@@ -1,7 +1,6 @@
-<% include ./partials/header.ejs %>
+<%- include('partials/header') %>
 
 <div class="profile w-full min-h-screen bg-zinc-800 text-white pt-1">
-
     <form hidden id="uploadform" action="/fileupload" method="post" enctype="multipart/form-data">
         <input type="file" name="image" id="">
     </form>
@@ -14,19 +13,19 @@
                 <img class="w-full h-full object-cover" src="/images/uploads/<%= user.profileImage %>" alt="">
             </div>
         </div>
-        <h1 class="text-3xl font-semibold mt-5">Ricky Thoudam</h1>
-        <div class="text-md">@username</div>
+        <h1 class="text-3xl font-semibold mt-5"><%= user.fullname %></h1>
+        <div class="text-md"><%= user.username %></div>
         <a href="/edit" class="px-7 py-2 mt-5 bg-zinc-700 rounded-full text-sm font-semibold">Edit</a>
-        <button class="px-10 py-2 rounded-lg bg-red-700 text-xs font-semibold mt-10">Add New Post</button>
+        <a href="/add" class="px-10 py-2 rounded-lg bg-red-700 text-xs font-semibold mt-10">Add New Post</a>
     </div>
 
     <div class="cards flex flex-wrap gap-10 px-10 mt-10">
         <div class="card">
             <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden">
-                <img class="w-full h-full object-cover" src="https://i.pinimg.com/474x/96/60/f1/9660f1eb3ec94a7f1651fce22b3ac62d.jpg" alt="">
+                <img class="w-full h-full object-cover" src="/images/uploads/<%= user?.posts[0]?.image %>" alt="">
             </div>
-            <h3 class="text-xl font-semibold mt-3">All pins</h3>
-            <h5 class="text-sm font-medium opacity-60">29pins</h5>
+            <a href="/show/posts" class="text-xl font-semibold mt-3">Your Uploaded Pins</a>
+            <h5 class="text-sm font-medium opacity-60"><%= user.posts.length %>Pins</h5>
         </div>
     </div>
 
@@ -39,4 +38,4 @@
         document.querySelector("#uploadform").submit();
     })
 </script>
-<% include ./partials/footer.ejs %>
+<%- include('partials/footer') %>
